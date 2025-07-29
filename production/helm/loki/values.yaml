@@ -75,7 +75,7 @@ loki:
     # -- Docker image repository
     repository: grafana/loki
     # -- Overrides the image tag whose default is the chart's appVersion
-    tag: 3.5.3
+    tag: 3.5.2
     # -- Overrides the image tag with an image digest
     digest: null
     # -- Docker image pull policy
@@ -176,6 +176,11 @@ loki:
 
     {{- with .Values.loki.ingester }}
     ingester:
+      {{- tpl (. | toYaml) $ | nindent 4 }}
+    {{- end }}
+
+    {{- with .Values.loki.ingester_client }}
+    ingester_client:
       {{- tpl (. | toYaml) $ | nindent 4 }}
     {{- end }}
 
